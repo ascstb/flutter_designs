@@ -1,29 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_designs/src/utils/util.dart';
 
 class ScrollPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: PageView(
-      scrollDirection: Axis.vertical,
-      children: [
-        _pagina1(),
-        _pagina2(),
-      ],
-    ));
+      body: PageView(
+        scrollDirection: Axis.vertical,
+        children: [
+          _page1(),
+          _page2(),
+        ],
+      ),
+      bottomNavigationBar: bottomNavigationBar(context, 1),
+    );
   }
 
-  Widget _pagina1() {
+  Widget _page1() {
     return Stack(
       children: [
-        _colorFondo(),
-        _imagenFondo(),
-        _textos(),
+        _backgroundColor(),
+        _backgroundImage(),
+        _texts(),
       ],
     );
   }
 
-  Widget _imagenFondo() {
+  Widget _backgroundImage() {
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -34,7 +37,7 @@ class ScrollPage extends StatelessWidget {
     );
   }
 
-  Widget _colorFondo() {
+  Widget _backgroundColor() {
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -42,19 +45,19 @@ class ScrollPage extends StatelessWidget {
     );
   }
 
-  Widget _textos() {
-    final estiloTexto = TextStyle(color: Colors.white, fontSize: 50.0);
+  Widget _texts() {
+    final textStyle = TextStyle(color: Colors.white, fontSize: 50.0);
     return SafeArea(
       child: Column(
         children: [
           SizedBox(height: 20.0),
           Text(
             '11°',
-            style: estiloTexto,
+            style: textStyle,
           ),
           Text(
-            'Miercoles',
-            style: estiloTexto,
+            'Wednesday',
+            style: textStyle,
           ),
           Expanded(child: Container()),
           Icon(
@@ -67,7 +70,7 @@ class ScrollPage extends StatelessWidget {
     );
   }
 
-  Widget _pagina2() {
+  Widget _page2() {
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -80,7 +83,7 @@ class ScrollPage extends StatelessWidget {
         onPressed: () {},
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 20),
-          child: Text('Bienvenidos', style: TextStyle(fontSize: 20.0)),
+          child: Text('Welcome', style: TextStyle(fontSize: 20.0)),
         ),
       )),
     );

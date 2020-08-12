@@ -2,29 +2,31 @@ import 'dart:math';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_designs/src/utils/util.dart';
 
-class BotonesPage extends StatelessWidget {
+class ButtonsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-          children: [
-            _fondoApp(),
-            SingleChildScrollView(
-              child: Column(
-                children: [
-                  _titulos(),
-                  _botonesRedondeados(),
-                ],
-              ),
-            )
-          ],
-        ),
-        bottomNavigationBar: _bottomNavigationBar(context));
+      body: Stack(
+        children: [
+          _appBackground(),
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                _titles(),
+                _roundedButtons(),
+              ],
+            ),
+          )
+        ],
+      ),
+      bottomNavigationBar: bottomNavigationBar(context, 2),
+    );
   }
 
-  Widget _fondoApp() {
-    final gradiente = Container(
+  Widget _appBackground() {
+    final gradient = Container(
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
@@ -54,7 +56,7 @@ class BotonesPage extends StatelessWidget {
         ));
 
     return Stack(children: <Widget>[
-      gradiente,
+      gradient,
       Positioned(
         top: -100.0,
         child: cajaRosa,
@@ -62,7 +64,7 @@ class BotonesPage extends StatelessWidget {
     ]);
   }
 
-  Widget _titulos() {
+  Widget _titles() {
     return SafeArea(
       child: Container(
         padding: EdgeInsets.all(20.0),
@@ -88,56 +90,30 @@ class BotonesPage extends StatelessWidget {
     );
   }
 
-  Widget _bottomNavigationBar(BuildContext context) {
-    return Theme(
-      data: Theme.of(context).copyWith(
-          canvasColor: Color.fromRGBO(55, 57, 84, 1.0),
-          primaryColor: Colors.pinkAccent,
-          textTheme: Theme.of(context).textTheme.copyWith(
-              caption: TextStyle(color: Color.fromRGBO(116, 117, 152, 1.0)))),
-      child: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calendar_today, size: 30.0),
-            title: Container(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.bubble_chart, size: 30.0),
-            title: Container(),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.supervised_user_circle, size: 30.0),
-            title: Container(),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _botonesRedondeados() {
+  Widget _roundedButtons() {
     return Table(
       children: [
         TableRow(children: [
-          _crearBotonRedondeado(Colors.blue, Icons.border_all, 'General'),
-          _crearBotonRedondeado(Colors.pink, Icons.brush, 'Paint')
+          _createRoundButton(Colors.blue, Icons.border_all, 'General'),
+          _createRoundButton(Colors.pink, Icons.brush, 'Paint')
         ]),
         TableRow(children: [
-          _crearBotonRedondeado(Colors.green, Icons.money_off, 'Money'),
-          _crearBotonRedondeado(Colors.orange, Icons.map, 'Map')
+          _createRoundButton(Colors.green, Icons.money_off, 'Money'),
+          _createRoundButton(Colors.orange, Icons.map, 'Map')
         ]),
         TableRow(children: [
-          _crearBotonRedondeado(Colors.red, Icons.lightbulb_outline, 'Bulb'),
-          _crearBotonRedondeado(Colors.purple, Icons.graphic_eq, 'Graphic')
+          _createRoundButton(Colors.red, Icons.lightbulb_outline, 'Bulb'),
+          _createRoundButton(Colors.purple, Icons.graphic_eq, 'Graphic')
         ]),
         TableRow(children: [
-          _crearBotonRedondeado(Colors.cyan, Icons.satellite, 'Satellite'),
-          _crearBotonRedondeado(Colors.amber, Icons.alarm, 'Alarm')
+          _createRoundButton(Colors.cyan, Icons.satellite, 'Satellite'),
+          _createRoundButton(Colors.amber, Icons.alarm, 'Alarm')
         ]),
       ],
     );
   }
 
-  Widget _crearBotonRedondeado(Color color, IconData icono, String texto) {
+  Widget _createRoundButton(Color color, IconData icon, String text) {
     return ClipRect(
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
@@ -157,12 +133,12 @@ class BotonesPage extends StatelessWidget {
                 backgroundColor: color,
                 radius: 35.0,
                 child: Icon(
-                  icono,
+                  icon,
                   color: Colors.white,
                   size: 30.0,
                 ),
               ),
-              Text(texto, style: TextStyle(color: color)),
+              Text(text, style: TextStyle(color: color)),
               SizedBox(
                 height: 5.0,
               )
